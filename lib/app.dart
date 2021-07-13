@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'supplemental/cut_corners_border.dart';
 
 import 'theme/colors.dart';
 import 'home.dart';
@@ -52,14 +53,52 @@ class ShrineApp extends StatelessWidget {
 // TODO: Build a Shrine Theme (103)
 final ThemeData _kShrineTheme = _buildShrineTheme();
 
+ThemeData _buildShrineTheme() {
+  final ThemeData base = ThemeData.light();
+  return base.copyWith(
+    primaryColor: kShrinePurple,
+    // elevatedButtonTheme: ElevatedButtonThemeData(
+    //   style: ElevatedButton.styleFrom(
+    //     primary: kShrinePink100,
+    //     onPrimary: kShrineBrown900,
+    //   ),
+    // ),
+    // textButtonTheme: TextButtonThemeData(
+    //   style: TextButton.styleFrom(
+    //     primary: kShrineBrown900,
+    //   ),
+    // ),
+    buttonTheme: base.buttonTheme.copyWith(
+      buttonColor: kShrinePurple,
+      textTheme: ButtonTextTheme.primary,
+      colorScheme: ColorScheme.light().copyWith(primary: kShrinePurple),
+    ),
+    scaffoldBackgroundColor: kShrineSurfaceWhite,
+    textTheme: _buildShrineTextTheme(base.textTheme),
+    primaryTextTheme: _buildShrineTextTheme(base.primaryTextTheme),
+    accentTextTheme: _buildShrineTextTheme(base.accentTextTheme),
+    primaryIconTheme: base.iconTheme.copyWith(color: kShrineSurfaceWhite),
+    inputDecorationTheme: InputDecorationTheme(
+      focusedBorder: CutCornersBorder(
+        borderSide: BorderSide(
+          width: 2.0,
+          color: kShrinePurple,
+        ),
+      ),
+      border: CutCornersBorder(),
+    ),
+  );
+}
+
 TextTheme _buildShrineTextTheme(TextTheme base) {
   return base
-      //font 설정한 것
       .copyWith(
         headline5: base.headline5?.copyWith(
           fontWeight: FontWeight.w500,
         ),
-        headline6: base.headline6?.copyWith(fontSize: 18.0),
+        headline6: base.headline6?.copyWith(
+          fontSize: 18.0,
+        ),
         caption: base.caption?.copyWith(
           fontWeight: FontWeight.w400,
           fontSize: 14.0,
@@ -69,43 +108,82 @@ TextTheme _buildShrineTextTheme(TextTheme base) {
           fontSize: 16.0,
         ),
       )
-      .apply
+      .apply(
         fontFamily: 'Rubik',
-        displayColor: kShrineBrown900,
-        bodyColor: kShrineBrown900,
       );
 }
 
-ThemeData _buildShrineTheme() {
-  final ThemeData base = ThemeData.light();
-  return base.copyWith(
-    accentColor: kShrineBrown900,
-    primaryColor: kShrinePink100,
-    buttonTheme: base.buttonTheme.copyWith(
-      buttonColor: kShrinePink100,
-      colorScheme: base.colorScheme.copyWith(
-        secondary: kShrineBrown900,
-      ),
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        primary: kShrinePink100,
-        onPrimary: kShrineBrown900,
-      ),
-    ),
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-        primary: kShrineBrown900,
-      ),
-    ),
-    // buttonBarTheme: base.buttonBarTheme.copyWith(
-    //   buttonTextTheme: ButtonTextTheme.accent,
-    // ),
-    scaffoldBackgroundColor: kShrineBackgroundWhite,
-    cardColor: kShrineBackgroundWhite,
-    textSelectionColor: kShrinePink100,
-    errorColor: kShrineErrorRed,
-  );
-}
+// TextTheme _buildShrineTextTheme(TextTheme base) {
+//   return base
+//       //font 설정한 것
+//       .copyWith(
+//         headline5: base.headline5?.copyWith(
+//           fontWeight: FontWeight.w500,
+//         ),
+//         headline6: base.headline6?.copyWith(fontSize: 18.0),
+//         caption: base.caption?.copyWith(
+//           fontWeight: FontWeight.w400,
+//           fontSize: 14.0,
+//         ),
+//         bodyText1: base.bodyText1?.copyWith(
+//           fontWeight: FontWeight.w500,
+//           fontSize: 16.0,
+//         ),
+//       ) //여기서 그냥 구글로 받아올 수 있음
+//       //fontFamily: GoogleFonts.rubik().fontFamily,
+//       .apply(
+//         fontFamily: 'Rubik',
+//         displayColor: kShrineBrown900,
+//         bodyColor: kShrineBrown900,
+//       );
+// }
+
+// ThemeData _buildShrineTheme() {
+//   final ThemeData base = ThemeData.light();
+//   return base.copyWith(
+//     accentColor: kShrineBrown900,
+//     primaryColor: kShrinePink100,
+//     buttonTheme: base.buttonTheme.copyWith(
+//       buttonColor: kShrinePink100,
+//       colorScheme: base.colorScheme.copyWith(
+//         secondary: kShrineBrown900,
+//       ),
+//     ),
+//     elevatedButtonTheme: ElevatedButtonThemeData(
+//       style: ElevatedButton.styleFrom(
+//         primary: kShrinePink100,
+//         onPrimary: kShrineBrown900,
+//       ),
+//     ),
+//     textButtonTheme: TextButtonThemeData(
+//       style: TextButton.styleFrom(
+//         primary: kShrineBrown900,
+//       ),
+//     ),
+//     // buttonBarTheme: base.buttonBarTheme.copyWith(
+//     //   buttonTextTheme: ButtonTextTheme.accent,
+//     // ),
+//     scaffoldBackgroundColor: kShrineBackgroundWhite,
+//     cardColor: kShrineBackgroundWhite,
+//     textSelectionColor: kShrinePink100,
+//     errorColor: kShrineErrorRed,
+//     //새로운 텍스트 테마 설정
+//     textTheme: _buildShrineTextTheme(base.textTheme),
+//     primaryTextTheme: _buildShrineTextTheme(base.primaryTextTheme),
+//     accentTextTheme: _buildShrineTextTheme(base.accentTextTheme),
+//     //맞춤 icon 설정
+//     primaryIconTheme: base.iconTheme.copyWith(color: kShrineBrown900),
+//     //텍스트 필드 테마 지정
+//     inputDecorationTheme: InputDecorationTheme(
+//       focusedBorder: OutlineInputBorder(
+//         borderSide: BorderSide(
+//           width: 2.0,
+//           color: kShrineBrown900,
+//         ),
+//       ),
+//       border: CutCornersBorder(),
+//     ),
+//   );
+// }
 
 // TODO: Build a Shrine Text Theme (103)
